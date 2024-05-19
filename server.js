@@ -25,7 +25,9 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.get("/" , (req, res) =>{
+  res.send("Api working!")
+})
 // api handling for all users 
 app.use("/api/auth", userRoutes);
 app.use("/api/auth", adminRoutes);
