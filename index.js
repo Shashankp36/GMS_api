@@ -14,11 +14,28 @@ const dbs=require('./DB/Database.js');
 const app=express();
 const port = process.env.PORT || 4500;
 // Middleware
-app.use(cors({
-  origin: 'http://localhost:3000',
+// app.use(cors({
+//   origin: 'http://localhost:3000',
+//   credentials: true,
+//   optionsSuccessStatus: 200, 
+// })); 
+const allowedOrigins = ['http://localhost:3000', 'https://municipalgms.vercel.app'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Check if the incoming origin is in the list of allowed origins
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
-  optionsSuccessStatus: 200, 
-})); 
+  optionsSuccessStatus: 200
+};
+
+// Middleware
+app.use(cors(corsOptions));
 
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
