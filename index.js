@@ -10,7 +10,7 @@ const newproblemroutes=require('./routes/Problem_router.js')
 const countRoutes = require('./routes/count_router.js');
 
 
-const dbs=require('./DB/database.js');
+const dbs=require('./DB/Database.js');
 const app=express();
 const port = process.env.PORT || 4500;
 // Middleware
